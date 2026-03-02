@@ -1,206 +1,200 @@
 # 3D Authentication LAB
 
-An immersive 3D cybersecurity learning platform built with Three.js. Learn real-world security concepts AND browser DevTools skills by solving 10 hands-on challenges, each with its own 3D visualization and guided walkthrough.
+A hands-on cybersecurity learning platform that teaches browser DevTools and web security fundamentals through 10 interactive 3D challenges.
 
-Designed for kids, students, and anyone curious about how security and web development work.
+Built for beginners, students, and educators. No prior security knowledge required.
 
-## Technologies
+![Three.js](https://img.shields.io/badge/Three.js-000?logo=threedotjs&logoColor=fff)
+![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-- Three.js
-- Vite
+## Overview
 
-## Getting Started
+Each level pairs a real-world security concept with a specific browser DevTools skill. Players progress from inspecting HTML elements to setting breakpoints and stepping through code, building practical debugging skills alongside security awareness.
+
+An in-game walkthrough system provides three tiers of guidance per level:
+
+1. **Concept explanation** in plain language
+2. **Progressive hints** with step-by-step DevTools instructions
+3. **Full solution** revealed only after all hints
+
+## Quick Start
 
 ```bash
+git clone https://github.com/Suffix30/3D-Authentication-LAB.git
+cd 3D-Authentication-LAB
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000/3D-Authentication-LAB/` in your browser.
+Open [http://localhost:3000/3D-Authentication-LAB/](http://localhost:3000/3D-Authentication-LAB/) in a Chromium-based browser for the best DevTools experience.
+
+## Curriculum
+
+| Level | Security Concept | DevTools Skill | Difficulty |
+|:-----:|------------------|----------------|:----------:|
+| 1 | Basic Authentication | Elements Tab | Easy |
+| 2 | Two-Factor Authentication | Sources Tab | Medium |
+| 3 | Pattern Recognition | Console Tab | Hard |
+| 4 | Hidden Headers | Network Tab | Medium |
+| 5 | SQL Injection Prevention | Console + Debugging | Hard |
+| 6 | JWT Token Verification | Console + `atob()` | Expert |
+| 7 | XSS Prevention | Elements + Live Editing | Hard |
+| 8 | Steganography | Application Tab + Storage | Expert |
+| 9 | Buffer Overflow Prevention | Debugger + Breakpoints | Expert |
+| 10 | Zero-Knowledge Proof | Full DevTools Mastery | Master |
 
 ## How to Play
 
-1. Each level presents a security challenge with a 3D scene and a form
-2. Read the hint below the form -- it tells you what the level is about
-3. Click the **? Help** button (bottom-right) for a guided walkthrough:
-   - **DevTools Skill badge** -- tells you which DevTools feature this level teaches
-   - **What is this?** -- explains the security concept in plain language
-   - **Next Hint** -- reveals step-by-step hints that teach you exactly where to click and what to look for in DevTools
-   - **Show Answer** -- only appears after all hints, gives you the final answer
-4. Fill in the form and click Submit
-5. Green packet flying in = correct! Red packet = try again
+1. Read the hint displayed below the form
+2. Use the **?** button in the bottom-right corner to open the walkthrough panel
+3. Work through the progressive hints -- each one teaches you exactly where to click and what to look for in DevTools
+4. Enter your answer in the form and click **Submit**
+5. A green packet animation confirms a correct answer; red means try again
 
-## DevTools Skills Progression
+## Tech Stack
 
-Each level teaches a specific browser DevTools skill, building from beginner to expert:
+| Component | Technology |
+|-----------|-----------|
+| 3D Rendering | [Three.js](https://threejs.org/) |
+| Build Tool | [Vite](https://vitejs.dev/) |
+| Deployment | [gh-pages](https://www.npmjs.com/package/gh-pages) |
 
-| Level | Security Concept | DevTools Skill You'll Learn |
-|-------|-----------------|---------------------------|
-| 1 | Basic Authentication | **Elements Tab** -- Inspect page structure and read HTML |
-| 2 | Two-Factor Auth | **Sources Tab** -- Browse and read a website's code files |
-| 3 | Pattern Recognition | **Console Tab** -- Run JavaScript commands in the browser |
-| 4 | Hidden Headers | **Network Tab** -- Watch requests and inspect hidden headers |
-| 5 | SQL Injection | **Console + Debugging** -- Test strings and logic in real time |
-| 6 | JWT Tokens | **Console + atob()** -- Decode Base64 data in the browser |
-| 7 | XSS Prevention | **Elements + Live Editing** -- Edit a live web page to test vulnerabilities |
-| 8 | Steganography | **Application Tab** -- Explore cookies, storage, and cached data |
-| 9 | Buffer Overflow | **Debugger + Breakpoints** -- Pause code and inspect variables mid-execution |
-| 10 | Zero-Knowledge Proof | **Full DevTools Mastery** -- Combine all skills to analyze and debug |
+## Project Structure
 
----
+```
+├── index.html                  Entry point
+├── vite.config.js              Vite configuration
+├── package.json
+└── src/
+    ├── main.js                 Application logic, UI, help panel
+    ├── index.css               Styles
+    ├── levels/
+    │   └── config.js           Level definitions, validation, walkthroughs
+    └── components/
+        └── LevelVisualizer.js  Three.js scene management per level
+```
 
-## Walkthrough
+## Deployment
 
-> Each level has three tiers: **Learn** (what the concept is), **Hints** (step-by-step DevTools instructions), and **Answer** (the solution). Try the hints first!
-
----
-
-### Level 1: Basic Authentication (Easy)
-**DevTools Skill: Elements Tab**
-
-**Learn:** Websites check your email and password when you log in. But you can use DevTools to inspect any website and see how it works.
-
-**How to solve it:**
-1. Right-click anywhere on the page and select "Inspect" (or press F12). This opens DevTools. You'll see the "Elements" tab showing the page's HTML code
-2. Click on different HTML lines -- parts of the page highlight. Find `<div id="form">` to see the form's structure and the hint text
-3. The hint says password needs 6+ characters. Type any email and a 6+ character password
-
-**Answer:** Email: `hello@test.com` | Password: `secure123`
-
----
-
-### Level 2: Two-Factor Authentication (Medium)
-**DevTools Skill: Sources Tab**
-
-**Learn:** 2FA adds a one-time code on top of your password. The Sources tab lets you see ALL code files a website loaded -- including secrets developers left in.
-
-**How to solve it:**
-1. Open DevTools (F12) > click the "Sources" tab. You'll see a file tree on the left with all the website's files
-2. Navigate to `src` > `levels` > `config.js`. This file has all level data including solutions. Find Level 2's solution object
-3. The solution shows `code: "123456"`. Password needs 8+ characters this time
-
-**Answer:** Email: `anything` | Password: `secure123` (8+ chars) | Code: `123456`
-
----
-
-### Level 3: Pattern Recognition (Hard)
-**DevTools Skill: Console Tab**
-
-**Learn:** The Console lets you run JavaScript commands directly in the browser. You can inspect variables, test code, and extract hidden data.
-
-**How to solve it:**
-1. Open DevTools (F12) > Console tab. Type `document.title` and press Enter -- it shows the page title. Try `document.querySelectorAll('input')` to list all form fields
-2. The pattern is in the source code. Go to Sources > `src/levels/config.js` > Level 3's solution
-3. Test in Console: `document.getElementById('form').innerHTML` shows the form's HTML
-
-**Answer:** Pattern: `1-4-2-3`
-
----
-
-### Level 4: Hidden Header Challenge (Medium)
-**DevTools Skill: Network Tab**
-
-**Learn:** The Network tab shows every request your browser makes and all the hidden headers attached to each one.
-
-**How to solve it:**
-1. Open DevTools (F12) > Network tab. Refresh the page (F5) to see all requests appear in the list
-2. Click any request to see its details. Look for "Request Headers" and "Response Headers" sections -- these carry hidden data
-3. The token is in Sources > `src/levels/config.js` > Level 4. The solution shows `X-Security-Token: h4ck3r`. Enter only the value part
-
-**Answer:** Token: `h4ck3r`
-
----
-
-### Level 5: SQL Injection Prevention (Hard)
-**DevTools Skill: Console + Debugging**
-
-**Learn:** SQL injection sneaks dangerous commands into forms. Use the Console to test which strings are safe before submitting.
-
-**How to solve it:**
-1. In the Console, test: `"hello world".includes("--")` returns false (safe). `"DROP--users".includes("--")` returns true (blocked)
-2. The validator blocks `--` and `UNION`. Test: `"SELECT UNION".toLowerCase().includes("union")` returns true (blocked)
-3. Read the validation in Sources > `config.js` > Level 5. Any text without `--` or `UNION` passes
-
-**Answer:** Query: `SELECT * FROM users WHERE id = 1` (or any text without `--` or `UNION`)
-
----
-
-### Level 6: JWT Token Verification (Expert)
-**DevTools Skill: Console + atob()**
-
-**Learn:** JWTs have three Base64-encoded parts separated by dots. The `atob()` function decodes Base64 right in the Console.
-
-**How to solve it:**
-1. In Console, try: `atob("aGVsbG8=")` -- it decodes to "hello". `atob()` is built into every browser
-2. Find the JWT in Sources > `config.js` > Level 6. Copy the middle part and decode it: `atob("eyJzdWIiOiJoYWNrZXIifQ")` reveals `{"sub":"hacker"}`
-3. Test the validator: `"a.b.c".split(".").length` returns 3 -- that would pass. The input needs exactly 3 dot-separated parts
-
-**Answer:** JWT: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWNrZXIifQ.secret` (or `a.b.c`)
-
----
-
-### Level 7: XSS Prevention (Hard)
-**DevTools Skill: Elements Tab + Live Editing**
-
-**Learn:** XSS injects malicious scripts into websites. The Elements tab lets you edit a live page to test for vulnerabilities.
-
-**How to solve it:**
-1. In Elements tab, right-click any text > "Edit as HTML." Try changing text to `<b>Hello!</b>` -- the page updates live. This is how testers check for XSS
-2. HTML entities: `<` becomes `&lt;` and `>` becomes `&gt;`. The browser shows them as text instead of running them as code
-3. Test in Console: `"&lt;script&gt;".includes("<script>")` returns false -- the escaped version is safe
-
-**Answer:** Script: `&lt;script&gt;alert(1)&lt;/script&gt;`
-
----
-
-### Level 8: Steganography (Expert)
-**DevTools Skill: Application Tab + Storage**
-
-**Learn:** Websites hide data in storage (cookies, localStorage, sessionStorage). The Application tab reveals it all.
-
-**How to solve it:**
-1. Open DevTools (F12) > Application tab (click >> if you don't see it). Explore "Local Storage", "Session Storage", "Cookies" on the left sidebar
-2. The 3D scene shows green pixels representing LSB (Least Significant Bit) steganography -- hiding data in pixel colors
-3. Find the answer in Sources > `config.js` > Level 8. The hidden message combines the technique name with what it contains
-
-**Answer:** Hidden: `LSB-SECRET`
-
----
-
-### Level 9: Buffer Overflow Prevention (Expert)
-**DevTools Skill: Debugger + Breakpoints**
-
-**Learn:** The Debugger lets you pause code mid-execution and inspect every variable. This is the most powerful DevTools skill.
-
-**How to solve it:**
-1. In Sources tab, open `src/main.js`. Find the `handleLogin` function. Click the line NUMBER next to `if (level.validation(credentials))` -- a blue breakpoint marker appears. Now fill in the form and click Submit -- the code PAUSES
-2. While paused, look at the "Scope" panel on the right. Expand "credentials" to see your input. In Console (while paused), type `credentials.buffer.length` to check your input's length
-3. Test: `"A".repeat(32).length` returns 32 (fits). `"A".repeat(33).length` returns 33 (overflow). Enter 32 or fewer characters. Click the blue marker again to remove the breakpoint
-
-**Answer:** Buffer: `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` (32 A's, or any text 32 chars or fewer)
-
----
-
-### Level 10: Zero-Knowledge Proof (Master)
-**DevTools Skill: Full DevTools Mastery**
-
-**Learn:** Combine everything: Elements, Sources, Console, Network, Application, and Debugger to analyze and solve the final challenge.
-
-**How to solve it:**
-1. Sources tab: open `config.js` > Level 10. Read the validation: `creds.proof && creds.commitment && creds.proof !== creds.commitment`. Three conditions joined by `&&` (AND)
-2. Console: test `Boolean("")` (false), `Boolean("hello")` (true), `"hello" !== "world"` (true). Both fields must be non-empty and different
-3. Set a breakpoint in `handleLogin`, fill in both fields, let it pause, then type `level.validation(credentials)` in Console to verify before resuming
-
-**Answer:** Proof: `ZKP-HASH` | Commitment: `COMMITMENT-HASH` (or any two different non-empty values)
-
----
-
-## Deploy
+Build and deploy to GitHub Pages:
 
 ```bash
 npm run build
 npm run deploy
 ```
+
+## Contributing
+
+Contributions are welcome. To add a new level:
+
+1. Add a level object to `src/levels/config.js` with `id`, `name`, `difficulty`, `requirements`, `hint`, `solution`, `validation`, `devtoolsSkill`, and `walkthrough`
+2. Add a corresponding visualization method in `src/components/LevelVisualizer.js`
+3. Register the new case in the `createVisualization` switch statement
+
+---
+
+## Walkthrough (Spoilers)
+
+<details>
+<summary>Level 1 -- Basic Authentication</summary>
+
+**DevTools Skill:** Elements Tab
+
+Open DevTools with F12 and select the Elements tab. Inspect the page structure to find the form and read the hint. The password must be at least 6 characters.
+
+**Answer:** Email: `hello@test.com` | Password: `secure123`
+</details>
+
+<details>
+<summary>Level 2 -- Two-Factor Authentication</summary>
+
+**DevTools Skill:** Sources Tab
+
+Open DevTools > Sources tab. Navigate the file tree to `src/levels/config.js` and locate Level 2's solution object. The password requirement increases to 8 characters.
+
+**Answer:** Email: `anything` | Password: `secure123` | Code: `123456`
+</details>
+
+<details>
+<summary>Level 3 -- Pattern Recognition</summary>
+
+**DevTools Skill:** Console Tab
+
+Open DevTools > Console tab. Practice running commands like `document.title` and `document.querySelectorAll('input')`. Find the pattern in the Sources tab under Level 3's solution.
+
+**Answer:** Pattern: `1-4-2-3`
+</details>
+
+<details>
+<summary>Level 4 -- Hidden Header Challenge</summary>
+
+**DevTools Skill:** Network Tab
+
+Open DevTools > Network tab and refresh the page to capture requests. Click any request to inspect its headers. The token value is in the level config under Level 4's solution.
+
+**Answer:** Token: `h4ck3r`
+</details>
+
+<details>
+<summary>Level 5 -- SQL Injection Prevention</summary>
+
+**DevTools Skill:** Console + Debugging
+
+Use the Console to test string methods: `"test".includes("--")` and `"test".toLowerCase().includes("union")`. The validator rejects any input containing `--` or `UNION`.
+
+**Answer:** Query: `SELECT * FROM users WHERE id = 1`
+</details>
+
+<details>
+<summary>Level 6 -- JWT Token Verification</summary>
+
+**DevTools Skill:** Console + `atob()`
+
+Use `atob()` in the Console to decode Base64 strings. A JWT has three dot-separated parts. The validator checks that `input.split('.').length === 3`.
+
+**Answer:** JWT: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWNrZXIifQ.secret`
+</details>
+
+<details>
+<summary>Level 7 -- XSS Prevention</summary>
+
+**DevTools Skill:** Elements Tab + Live Editing
+
+Right-click any element in the Elements tab and select "Edit as HTML" to practice live editing. The validator rejects input containing literal `<script>`. Submit the HTML-escaped version.
+
+**Answer:** Script: `&lt;script&gt;alert(1)&lt;/script&gt;`
+</details>
+
+<details>
+<summary>Level 8 -- Steganography</summary>
+
+**DevTools Skill:** Application Tab + Storage
+
+Open DevTools > Application tab to explore Local Storage, Session Storage, and Cookies. The 3D scene represents LSB (Least Significant Bit) steganography. The answer is in the level config.
+
+**Answer:** Hidden: `LSB-SECRET`
+</details>
+
+<details>
+<summary>Level 9 -- Buffer Overflow Prevention</summary>
+
+**DevTools Skill:** Debugger + Breakpoints
+
+In the Sources tab, open `src/main.js` and set a breakpoint on the validation line inside `handleLogin`. Submit the form to pause execution, then inspect variables in the Scope panel. The buffer limit is 32 characters.
+
+**Answer:** Buffer: `AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA` (32 characters or fewer)
+</details>
+
+<details>
+<summary>Level 10 -- Zero-Knowledge Proof</summary>
+
+**DevTools Skill:** Full DevTools Mastery
+
+Combine all skills: read the validation logic in Sources, test conditions in Console, and verify with breakpoints. Both fields must be non-empty and different from each other.
+
+**Answer:** Proof: `ZKP-HASH` | Commitment: `COMMITMENT-HASH`
+</details>
 
 ## License
 
